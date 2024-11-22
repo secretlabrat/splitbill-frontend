@@ -1,111 +1,110 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <style>
-        /* Body Styling */
-        body.ic-Login-Body {
-            background-image: linear-gradient(transparent, transparent 80%), url('splitBill.png');
-            background-size: cover;
-            background-attachment: fixed;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            color: #FFFFFF;
-        }
+      /* Body Styling */
+      body.ic-Login-Body {
+        background-image: linear-gradient(transparent, transparent 80%),
+          url("splitBill.png");
+        background-size: cover;
+        background-attachment: fixed;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        color: #ffffff;
+      }
 
-        /* Centered Login Container */
-        .ic-Login {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 40px;
-            border-radius: 8px;
-            width: 300px;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
-            text-align: center;
-        }
+      /* Centered Login Container */
+      .ic-Login {
+        background: rgba(0, 0, 0, 0.7);
+        padding: 40px;
+        border-radius: 8px;
+        width: 300px;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+        text-align: center;
+      }
 
-        /* Input Fields Styling */
-        .ic-Form-control {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-        .ic-Label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-        .ic-Input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #555;
-            border-radius: 4px;
-            background-color: #333;
-            color: #fff;
-        }
+      /* Input Fields Styling */
+      .ic-Form-control {
+        margin-bottom: 20px;
+        text-align: left;
+      }
+      .ic-Label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 14px;
+      }
+      .ic-Input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #555;
+        border-radius: 4px;
+        background-color: #333;
+        color: #fff;
+      }
 
-        /* Button Styling */
-        .Button--login, .Button--google {
-            width: 100%;
-            padding: 10px;
-            color: #fff;
-            border: 1px solid #fff;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-            margin-top: 10px;
-        }
+      /* Button Styling */
+      .Button--login,
+      .Button--google {
+        width: 100%;
+        padding: 10px;
+        color: #fff;
+        border: 1px solid #fff;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+        margin-top: 10px;
+      }
 
-        /* Login Button Specific Style */
-        .Button--login {
-            background-color: #555;
-        }
-        .Button--login:hover {
-            background-color: #777;
-        }
+      /* Login Button Specific Style */
+      .Button--login {
+        background-color: #555;
+      }
+      .Button--login:hover {
+        background-color: #777;
+      }
 
-        /* Google Button Specific Style */
-        .Button--google {
-            background-color: #DB4437; /* Google red */
-        }
-        .Button--google:hover {
-            background-color: #E57368;
-        }
-
-        /* Forgot Password Link */
-        .ic-Login__forgot {
-            margin-top: 10px;
-        }
-        .ic-Login__forgot a {
-            color: #ccc;
-            font-size: 12px;
-            text-decoration: none;
-        }
-        .ic-Login__forgot a:hover {
-            text-decoration: underline;
-        }
+      /* Google Button Specific Style */
+      .Button--google {
+        background-color: #db4437; /* Google red */
+      }
+      .Button--google:hover {
+        background-color: #e57368;
+      }
     </style>
     <script type="module" src="./js/login.js"></script>
-</head>
-<body class="ic-Login-Body">
+  </head>
+  <body class="ic-Login-Body">
     <div class="ic-Login">
-        <div>
-            <h2>Log In</h2>
-            
-            <div class="ic-Form-control">
-                <label class="ic-Label" for="email">Email</label>
-                <input class="ic-Input" id="email" type="text" name="pseudonym_session[unique_id]" />
-            </div>
-            
-            <div class="ic-Form-control">
-                <label class="ic-Label" for="password">Password</label>
-                <input class="ic-Input" id="password" type="password" name="pseudonym_session[password]" />
-            </div>
-            <button id="sign-in-email" class="Button--login">Log In with Email and Password</button>
-            <button id="sign-in-google" class="Button--google">Sign in with Google</button>
+      <div>
+        <h2>Log In</h2>
+        <div class="ic-Form-control">
+          <label class="ic-Label" for="email">Email</label>
+          <input
+            class="ic-Input"
+            id="email"
+            type="text"
+          />
         </div>
+        <div class="ic-Form-control">
+          <label class="ic-Label" for="password">Password</label>
+          <input
+            class="ic-Input"
+            id="password"
+            type="password"
+          />
+        </div>
+        <button id="sign-in-email" class="Button--login">
+          Log In with Email and Password
+        </button>
+        <button id="sign-in-google" class="Button--google">
+          Sign in with Google
+        </button>
+      </div>
     </div>
-</body>
+  </body>
 </html>
