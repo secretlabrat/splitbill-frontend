@@ -3,70 +3,73 @@ import {
   signInWithEmailAndPassword,
   signOut,
   GoogleAuthProvider,
+  onAuthStateChanged,
   signInWithPopup,
 } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
-
 export function loginWithPassword(email, password) {
-  console.log('email');
-
- signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in 
-      const user = userCredential.user;
-      alert('Logging sucessfully');
-      location.href = `index.html?uid=${user.uid}`;
-      // ...
+  return signInWithEmailAndPassword(auth, email, password)
+    .then(() => {
+      console.log("Login Successfully");
     })
     .catch((error) => {
-
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorCode);
       console.log(errorMessage);
-      alert('Logging fail');
+      alert("Logging fail");
+    });
+}
+
+export function loginWithGoogle() {
+  let provider = new GoogleAuthProvider();
+
+  return signInWithPopup(auth, provider)
+    .then(() => {
+      console.log("Login Successfully");
     })
-  };
+    .catch((error) => {
+      console.log("login error");
+      // Handle Errors here.
+      const errorCode = error.code;
+      console.log(errorCode);
+      const errorMessage = error.message;
+      console.log(errorMessage);
+    });
+}
 
-  export function loginWithGoogle() {
-  
-    let provider = new GoogleAuthProvider();
-
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-        location.href = 'index.html';
-        // IdP data available using getAdditionalUserInfo(result)
-        
-        // ...
-      }).catch((error) => {
-        console.log('login error');
-        // Handle Errors here.
-        const errorCode = error.code;
-        console.log(errorCode);
-
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        console.log(errorMessage);
-        console.log(email);
-
-        // ...
-      });
-    };
-  
-export function lougot() {
+export function logout() {
   return signOut(auth)
     .then(() => {
-      console.log("Logout Sucessful");
+      clearAccessToken();
+      console.log("Logout Sucessfully");
     })
     .catch((error) => {
       console.log(error.message);
     });
 }
+
+const setAccessToken = (token) => {
+  sessionStorage.setItem("accessToken", token);
+};
+
+export const getAccessToken = () => {
+  sessionStorage.getItem("accessToken");
+};
+
+const clearAccessToken = () => {
+  sessionStorage.removeItem("accessToken");
+};
+
+export const authStateListener = () => {
+  onAuthStateChanged(auth, (user) => {
+    console.log(user);
+    if (!user && location.pathname !== "/login.html") {
+      clearAccessToken();
+      return (location.href = "login.html");
+    } else if (user && location.pathname === "/login.html") {
+      setAccessToken(user.accessToken);
+      location.href = "index.html";
+    }
+  });
+};
