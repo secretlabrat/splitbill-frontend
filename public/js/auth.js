@@ -54,7 +54,7 @@ const setAccessToken = (token) => {
 };
 
 export const getAccessToken = () => {
-  sessionStorage.getItem("accessToken");
+  return sessionStorage.getItem("accessToken");
 };
 
 const clearAccessToken = () => {
