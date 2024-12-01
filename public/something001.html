@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Product List Page</title>
+    <style>
+        .listContainer {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .productcard {
+            border: 1px solid gray;
+            padding: 20px;
+            width: 200px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .productcard img {
+            width: 100%;
+        }
+        .details {
+            display: none;
+            margin-top: 10px;
+        }
+        .productcard.show-details .details {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>List of Products</h1>
+    <button id="fetch-users-button" onclick="fetchfunction()">Fetch Products</button>
+    
+    <div id="product-list-container" class="listContainer"></div>
+    
+    <script src="fetch_something001.js"></script>
+</body>
+</html>
