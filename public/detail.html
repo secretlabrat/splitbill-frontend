@@ -1,127 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tab Navigation Example</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-      /* Body Styling */
-      body {
-        background-image: linear-gradient(transparent, transparent 80%), url('splitBill.png');
-        background-size: cover;
-        background-attachment: fixed;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0;
-        font-family: Arial, sans-serif;
-        color: #FFFFFF;
-      }
-
-      /* Tab button styling */
-      .tab-button {
-        cursor: pointer;
-        padding: 15px 30px;
-        border: 1px solid #ccc;
-        display: inline-block;
-        margin-right: 10px;
-        background-color: #f0f0f0;
-        font-size: 1.2em;
-        color: #333;
-        transition: background-color 0.3s, color 0.3s;
-      }
-
-      .tab-button.active {
-        background-color: #ff8c00;
-        color: #fff;
-        font-weight: bold;
-      }
-
-      .tab-button:hover {
-        background-color: #ffa500;
-        color: #fff;
-      }
-
-      /* Tab content styling */
-      .tab-content {
-        display: none;
-        padding: 30px;
-        border: 1px solid #ccc;
-        margin-top: 20px;
-        background: rgba(0, 0, 0, 0.7);
-        border-radius: 8px;
-        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
-        font-size: 1.2em;
-      }
-
-      .tab-content.active {
-        display: block;
-      }
-
-      /* Modal styling */
-      .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-      }
-      .modal-content {
-        background-color: #fff;
-        margin: 10% auto;
-        padding: 30px;
-        border: 1px solid #888;
-        width: 400px;
-        text-align: center;
-        font-size: 1.2em;
-        color: #000;
-      }
-      .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-      }
-      input[type="text"], input[type="number"] {
-        font-size: 1.2em;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-      }
-      button {
-        font-size: 1.2em;
-        padding: 10px 20px;
-        background-color: #4caf50;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
-      button:hover {
-        background-color: #45a049;
-      }
-      .Button--submit {
-        font-size: 1.2em;
-        padding: 10px 20px;
-        color: #fff;
-        background-color: #555;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
-
-      .Button--submit:hover {
-        background-color: #777;
-      }
-    </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Split Bill</title>
+    <link rel="stylesheet" href="./css/detail.css" />
   </head>
   <body>
     <div id="tabs">
@@ -129,260 +12,123 @@
         <span class="tab-button" data-tab="addFood">Add Food</span>
         <span class="tab-button" data-tab="addMember">Add Member</span>
       </div>
-
+      <div
+        style="
+          padding: 1rem;
+          text-align: center;
+          background: rgba(0, 0, 0, 0.7);
+          border-radius: 5px;
+          margin-top: 1rem;
+        "
+      >
+        Bill name
+        <input
+          id="billName"
+          style="padding: 1rem; border-radius: 5px; border: none"
+        />
+      </div>
       <div id="tab-contents">
-        <form id="mainForm" action="data.php" method="post" enctype="multipart/form-data">
-          <div id="addFood" class="tab-content">
-            <div id="foodDisplay"><h3>Current Foods:</h3><ul></ul></div>
-            <table>
-              <thead>
-                <tr>
-                  <th>Food name</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><input type="text" id="newFoodName"></td>
-                  <td><button id="openModal" type="button">Add Food</button></td>
-                </tr>
-              </tbody>
-            </table>
+        <div id="addFood" class="tab-content">
+          <div id="foodDisplay">
+            <h3>Items:</h3>
+            <ul></ul>
           </div>
-
-          <!-- Popup for adding new food -->
-          <div id="myModal" class="modal">
-            <div class="modal-content">
-              <span class="close">&times;</span>
-              <h2 style="color: #000;">Add New Food</h2>
-              <p id="modalFoodNameDisplay" style="color: #000;"></p>
-              <div id="memberCheckboxes" style="color: #000;"></div><br><br>
-              <input type="number" id="modalFoodPrice" placeholder="Price" min="0" step="0.01"><br><br>
-              <button id="confirmAdd" type="button">Confirm</button>
-            </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Food name</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="text" id="newFoodName" /></td>
+                <td>
+                  <button id="openModal" onclick="addItem()">Add Food</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="addMember" class="tab-content">
+          <div id="memberDisplay">
+            <h3>Members:</h3>
+            <ul></ul>
           </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Member name</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="text" id="newMemberName" /></td>
+                <td>
+                  <button id="addMemberButton" onclick="addPayer()">
+                    Add Member
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="display: flex; justify-content: space-between">
+          <button
+            class="Button--submit"
+            onclick="document.location.href = './index.html'"
+          >
+            Back to Litst
+          </button>
+          <button id="save" class="Button--submit" onclick="saveHistory()">
+            Save
+          </button>
+        </div>
+      </div>
+      <!-- Popup for adding new food -->
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2 style="color: #000">Add New Item</h2>
+          <p id="modalFoodNameDisplay" style="color: #000"></p>
+          <div id="memberCheckboxes" style="color: #000"></div>
+          <br /><br />
+          <input
+            type="number"
+            id="modalFoodPrice"
+            placeholder="Price"
+            min="0"
+            step="0.01"
+          /><br /><br />
+          <button id="confirmAdd" onclick="confirmAddItem()">Confirm</button>
+        </div>
+      </div>
 
-          <!-- Popup for editing food -->
-          <div id="editModal" class="modal">
-            <div class="modal-content">
-              <span class="close">&times;</span>
-              <h2 style="color: #000;">Edit Food</h2>
-              <input type="text" id="editFoodName" placeholder="Food Name"><br><br>
-              <div id="editMemberCheckboxes" style="color: #000;"></div><br><br>
-              <input type="number" id="editFoodPrice" placeholder="Price" min="0" step="0.01"><br><br>
-              <button id="confirmEdit" type="button">Save Changes</button>
-            </div>
-          </div>
-
-          <div id="addMember" class="tab-content">
-            <div id="memberDisplay"><h3>Current Members:</h3><ul></ul></div>
-            <table>
-              <thead>
-                <tr>
-                  <th>Member name</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><input type="text" id="newMemberName"></td>
-                  <td><button id="addMemberButton" type="button">Add Member</button></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <input type="submit" name="send" value="submit" class="Button--submit">
-        </form>
+      <!-- Popup for editing food -->
+      <div id="editModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2 style="color: #000">Edit Food</h2>
+          <input
+            type="text"
+            id="editFoodName"
+            placeholder="Food Name"
+          /><br /><br />
+          <div id="editMemberCheckboxes" style="color: #000"></div>
+          <br /><br />
+          <input
+            type="number"
+            id="editFoodPrice"
+            placeholder="Price"
+            min="0"
+            step="0.01"
+          /><br /><br />
+          <button id="confirmEdit">Save Changes</button>
+        </div>
       </div>
     </div>
 
-    <script>
-      // Implement tab switching
-      document.addEventListener('DOMContentLoaded', function() {
-        const tabButtons = document.querySelectorAll('.tab-button');
-        const tabContents = document.querySelectorAll('.tab-content');
-
-        tabButtons.forEach(button => {
-          button.addEventListener('click', function() {
-            // Remove active class from all tab buttons
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-
-            // Remove active class from all tab contents
-            tabContents.forEach(content => content.classList.remove('active'));
-
-            // Add active class to the clicked tab button
-            button.classList.add('active');
-
-            // Add active class to the corresponding tab content
-            const tabId = button.getAttribute('data-tab');
-            document.getElementById(tabId).classList.add('active');
-          });
-        });
-
-        // Display the first tab by default
-        tabButtons[0].click();
-      });
-
-      $(function() {
-        // Open the modal when Open Modal button is clicked
-        $('#openModal').click(function() {
-          var newFoodName = $('#newFoodName').val();
-          $('#modalFoodNameDisplay').text('Food Name: ' + newFoodName);
-
-          // Populate member checkboxes
-          $('#memberCheckboxes').empty();
-          $('#memberDisplay li').each(function() {
-            var memberName = $(this).text().replace(/ - \$[\d.]+ Remove/, '');
-            $('#memberCheckboxes').append('<input type="checkbox" class="memberCheckbox" value="' + memberName + '"> ' + memberName + '<br>');
-          });
-
-          $('#myModal').css('display', 'block');
-        });
-
-        // Close the modal when the close button is clicked
-        $('.close').click(function() {
-          $(this).closest('.modal').css('display', 'none');
-        });
-
-        // Close the modal when clicking outside of the modal content
-        $(window).click(function(event) {
-          if ($(event.target).hasClass('modal')) {
-            $(event.target).css('display', 'none');
-          }
-        });
-
-        // Confirm adding new food
-        $('#confirmAdd').click(function() {
-          var newFoodName = $('#newFoodName').val();
-          var newFoodPrice = parseFloat($('#modalFoodPrice').val());
-          var selectedMembers = [];
-          $('.memberCheckbox:checked').each(function() {
-            selectedMembers.push($(this).val());
-          });
-
-          if (newFoodName && newFoodPrice && selectedMembers.length > 0) {
-            var memberText = selectedMembers.join(', ');
-            $('#foodDisplay ul').append('<li>' + newFoodName + ' - $' + newFoodPrice.toFixed(2) + ' (Members: ' + memberText + ') <button class="removeFood" type="button">Remove</button> <button class="editFood" type="button">Edit</button></li>');
-            $('#newFoodName').val('');
-            $('#modalFoodPrice').val('');
-
-            // Divide the food price among the selected members
-            var splitPrice = (newFoodPrice / selectedMembers.length).toFixed(2);
-            selectedMembers.forEach(function(member) {
-              var memberListItem = $('#memberDisplay li:contains(' + member + ')');
-              if (memberListItem.length > 0) {
-                var currentAmount = parseFloat(memberListItem.data('amount')) || 0;
-                var newAmount = (currentAmount + parseFloat(splitPrice)).toFixed(2);
-                memberListItem.data('amount', newAmount);
-                memberListItem.html(member + ' - $' + newAmount + ' <button class="removeMemberName" type="button">Remove</button>');
-              }
-            });
-
-            $('#myModal').css('display', 'none');
-          }
-        });
-
-        // Remove food from display
-        $('#foodDisplay').on('click', '.removeFood', function() {
-          $(this).parent().remove();
-        });
-
-        // Edit food from display
-        $('#foodDisplay').on('click', '.editFood', function() {
-          var listItem = $(this).parent();
-          var foodDetails = listItem.text().replace(' Remove Edit', '').split(' - $');
-          var foodName = foodDetails[0];
-          var priceAndMembers = foodDetails[1].split(' (Members: ');
-          var foodPrice = priceAndMembers[0];
-          var currentMembers = priceAndMembers[1].replace(')', '').split(', ');
-
-          // Set values in edit modal
-          $('#editFoodName').val(foodName);
-          $('#editFoodPrice').val(foodPrice);
-
-          // Populate edit member checkboxes
-          $('#editMemberCheckboxes').empty();
-          $('#memberDisplay li').each(function() {
-            var memberName = $(this).text().replace(/ - \$[\d.]+ Remove/, '');
-            var isChecked = currentMembers.includes(memberName) ? 'checked' : '';
-            $('#editMemberCheckboxes').append('<input type="checkbox" class="editMemberCheckbox" value="' + memberName + '" ' + isChecked + '> ' + memberName + '<br>');
-          });
-
-          // Open edit modal
-          $('#editModal').css('display', 'block');
-
-          // Save changes
-          $('#confirmEdit').off('click').on('click', function() {
-            var updatedFoodName = $('#editFoodName').val();
-            var updatedFoodPrice = $('#editFoodPrice').val();
-            var updatedMembers = [];
-            $('.editMemberCheckbox:checked').each(function() {
-              updatedMembers.push($(this).val());
-            });
-            if (updatedFoodName && updatedFoodPrice && updatedMembers.length > 0) {
-              var updatedMemberText = updatedMembers.join(', ');
-              listItem.html(
-                updatedFoodName +
-                ' - $' +
-                updatedFoodPrice +
-                ' (Members: ' +
-                updatedMemberText +
-                ') <button class="removeFood" type="button">Remove</button> <button class="editFood" type="button">Edit</button>'
-              );
-              $('#editModal').css('display', 'none');
-            }
-          });
-        });
-
-        // Handle form submission
-        $('#mainForm').submit(function(event) {
-          event.preventDefault(); // Prevent default form submission
-
-          var foodData = [];
-          $('#foodDisplay li').each(function() {
-            foodData.push($(this).text().replace(' Remove Edit', ''));
-          });
-
-          var memberData = [];
-          $('#memberDisplay li').each(function() {
-            memberData.push($(this).text().replace(' Remove', ''));
-          });
-
-          console.log("Submitted Food Data:", foodData);
-          console.log("Submitted Member Data:", memberData);
-
-          // Create a hidden input to store food and member data for submission
-          $('<input>').attr({
-            type: 'hidden',
-            name: 'foodData',
-            value: JSON.stringify(foodData)
-          }).appendTo('#mainForm');
-
-          $('<input>').attr({
-            type: 'hidden',
-            name: 'memberData',
-            value: JSON.stringify(memberData)
-          }).appendTo('#mainForm');
-
-          // Submit the form
-          this.submit();
-        });
-
-        // Add new member to display
-        $('#addMemberButton').click(function() {
-          var newMemberName = $('#newMemberName').val();
-          if (newMemberName) {
-            $('#memberDisplay ul').append('<li>' + newMemberName + ' - $0.00 <button class="removeMemberName" type="button">Remove</button></li>');
-            $('#newMemberName').val('');
-          }
-        });
-
-        // Remove member from display
-        $('#memberDisplay').on('click', '.removeMemberName', function() {
-          $(this).parent().remove();
-        });
-      });
-    </script>
+    <script src="./js/detail.js"></script>
   </body>
 </html>

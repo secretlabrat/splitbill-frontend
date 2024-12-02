@@ -3,7 +3,7 @@
   <head>
     <style>
       /* Body Styling */
-      body.ic-Login-Body {
+      body.ic-Signup-Body {
         background-image: linear-gradient(transparent, transparent 80%),
           url("./assets/images/splitBill.png");
         background-size: cover;
@@ -17,8 +17,8 @@
         color: #ffffff;
       }
 
-      /* Centered Login Container */
-      .ic-Login {
+      /* Centered Signup Container */
+      .ic-Signup {
         background: rgba(0, 0, 0, 0.7);
         padding: 40px;
         border-radius: 8px;
@@ -47,7 +47,7 @@
       }
 
       /* Button Styling */
-      .Button--login,
+      .Button--signup,
       .Button--google {
         width: 100%;
         padding: 10px;
@@ -60,11 +60,11 @@
         margin-top: 10px;
       }
 
-      /* Login Button Specific Style */
-      .Button--login {
+      /* Signup Button Specific Style */
+      .Button--signup {
         background-color: #555;
       }
-      .Button--login:hover {
+      .Button--signup:hover {
         background-color: #777;
       }
 
@@ -75,33 +75,31 @@
       .Button--google:hover {
         background-color: #e57368;
       }
-      a {
-        outline: none;
-        color: white;
-        text-decoration: none;
-      }
     </style>
-    <script type="module" src="./js/login.js"></script>
+    <script type="module" src="./js/signup.js"></script>
   </head>
-  <body class="ic-Login-Body">
-    <div class="ic-Login">
+  <body class="ic-Signup-Body">
+    <div class="ic-Signup">
       <div>
-        <h2>Log In</h2>
+        <h2>Sign Up</h2>
         <div class="ic-Form-control">
           <label class="ic-Label" for="email">Email</label>
-          <input class="ic-Input" id="email" type="text" />
+          <input
+            class="ic-Input"
+            id="email"
+            type="text"
+          />
         </div>
         <div class="ic-Form-control">
           <label class="ic-Label" for="password">Password</label>
-          <input class="ic-Input" id="password" type="password" />
+          <input
+            class="ic-Input"
+            id="password"
+            type="password"
+          />
         </div>
-        <h3><a href="/signup.html">Sign up</a></h3>
-        <button id="sign-in-email" class="Button--login">
-          Log In with Email and Password
-        </button>
-        <button id="sign-in-google" class="Button--google">
-          Sign in with Google
-        </button>
+        <button id="sign-up-email" class="Button--signup">
+          Sign up
       </div>
     </div>
   </body>

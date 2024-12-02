@@ -1,11 +1,23 @@
 import { auth } from "./firebase-config.js";
 import {
+  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
   GoogleAuthProvider,
   onAuthStateChanged,
   signInWithPopup,
 } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+export function signUpWithEmailAndPassword(email, password) {
+  return createUserWithEmailAndPassword(auth, email, password)
+    .then(() => console.log("sign up sucessfully"))
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode);
+      console.log(errorMessage);
+    });
+}
 
 export function loginWithPassword(email, password) {
   return signInWithEmailAndPassword(auth, email, password)
@@ -54,7 +66,7 @@ const setAccessToken = (token) => {
 };
 
 export const getAccessToken = () => {
-  sessionStorage.getItem("accessToken");
+  return sessionStorage.getItem("accessToken");
 };
 
 const clearAccessToken = () => {
@@ -63,13 +75,25 @@ const clearAccessToken = () => {
 
 export const authStateListener = () => {
   onAuthStateChanged(auth, (user) => {
-    console.log(user);
-    if (!user && location.pathname !== "/login.html") {
-      clearAccessToken();
-      return (location.href = "login.html");
-    } else if (user && location.pathname === "/login.html") {
+    if (user) {
       setAccessToken(user.accessToken);
-      location.href = "index.html";
+    } else {
+      clearAccessToken();
+    }
+    if (
+      user &&
+      (location.pathname === "/login.html" ||
+        location.pathname === "/signup.html")
+    ) {
+      location.href = "/";
+    } else if (
+      !user &&
+      !(
+        location.pathname === "/login.html" ||
+        location.pathname === "/signup.html"
+      )
+    ) {
+      return (location.href = "/login.html");
     }
   });
 };
