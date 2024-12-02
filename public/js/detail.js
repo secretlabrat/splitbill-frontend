@@ -1,5 +1,6 @@
 var items = [];
 var payers = [];
+var billName = "";
 var fetchProtectedRouteCache = null;
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -37,9 +38,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const id = urlParams.get("id") || "";
   if (id || id !== "") {
-    fetchProtectedRoute(`http://localhost:8080/v1/histories/${id}`).then(
+    fetchProtectedRoute(`https://splitbill-api.kidkrub.me/v1/histories/${id}`).then(
       (data) => {
-        ({ items, payers } = data);
+        ({ billName, items, payers } = data);
+        document.getElementById("billName").value = billName;
         calculateAmount();
       }
     );
@@ -59,9 +61,9 @@ async function loadFetchProtectedRoute() {
   }
 }
 
-async function fetchProtectedRoute(url) {
+async function fetchProtectedRoute(url, options = {}) {
   const fetchProtectedRoute = await loadFetchProtectedRoute();
-  return fetchProtectedRoute(url);
+  return fetchProtectedRoute(url, options);
 }
 
 function getLatestId(arrays) {
@@ -244,10 +246,28 @@ function calculateAmount() {
 }
 
 function saveHistory() {
+  if (!items.length || !payers.length) return;
+  const billName = document.getElementById("billName").value;
   const urlParams = new URLSearchParams(window.location.search);
 
   const id = urlParams.get("id") || "";
-  if(id || id!== "") {
-    fetchProtectedRoute()
+  if (id || id !== "") {
+    fetchProtectedRoute(`https://splitbill-api.kidkrub.me/v1/histories/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ billName, items, payers }),
+    }).then((result) => {
+      console.log(result);
+      alert("Saved");
+    });
+  } else {
+    fetchProtectedRoute(`https://splitbill-api.kidkrub.me/v1/histories/`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ billName, items, payers }),
+    }).then((result) => {
+      console.log(result);
+      alert("Saved");
+    });
   }
 }

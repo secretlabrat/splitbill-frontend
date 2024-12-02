@@ -12,6 +12,21 @@
         <span class="tab-button" data-tab="addFood">Add Food</span>
         <span class="tab-button" data-tab="addMember">Add Member</span>
       </div>
+      <div
+        style="
+          padding: 1rem;
+          text-align: center;
+          background: rgba(0, 0, 0, 0.7);
+          border-radius: 5px;
+          margin-top: 1rem;
+        "
+      >
+        Bill name
+        <input
+          id="billName"
+          style="padding: 1rem; border-radius: 5px; border: none"
+        />
+      </div>
       <div id="tab-contents">
         <div id="addFood" class="tab-content">
           <div id="foodDisplay">
@@ -59,7 +74,17 @@
             </tbody>
           </table>
         </div>
-        <button id="save" class="Button--submit" onclick="saveHistory()">Save</button>
+        <div style="display: flex; justify-content: space-between">
+          <button
+            class="Button--submit"
+            onclick="document.location.href = './index.html'"
+          >
+            Back to Litst
+          </button>
+          <button id="save" class="Button--submit" onclick="saveHistory()">
+            Save
+          </button>
+        </div>
       </div>
       <!-- Popup for adding new food -->
       <div id="myModal" class="modal">

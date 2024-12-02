@@ -1,22 +1,18 @@
-import { getAccessToken } from "./auth";
+import { getAccessToken } from "./auth.js";
 
-export const fetchProtectedRoute = async (url) => {
+export const fetchProtectedRoute = (url, options = {}) => {
+  return new Promise((resolve, reject) => {
     const token = getAccessToken();
-    if (!token) {
-        throw new Error("Access token is missing. Please log in.");
-    }
-
-    const response = await fetch(url, {
-        method: "GET",
-        headers: {
-            "Authorization": `Bearer ${token}`,
-            "Content-Type": "application/json",
-        },
-    });
-
-    if (!response.ok) {
-        throw new Error(`Failed to fetch data: ${response.statusText}`);
-    }
-
-    return response.json();
+    const headers = new Headers(options.headers || {});
+    headers.append("Authorization", `Bearer ${token}`);
+    fetch(url, {
+      ...options,
+      headers: headers,
+    })
+      .then((result) => result.json())
+      .then((data) => {
+        resolve(data);
+      })
+      .catch((error) => reject(error));
+  });
 };
