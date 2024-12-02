@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      /* Body Styling */
+      body.ic-Signup-Body {
+        background-image: linear-gradient(transparent, transparent 80%),
+          url("./assets/images/splitBill.png");
+        background-size: cover;
+        background-attachment: fixed;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        color: #ffffff;
+      }
+
+      /* Centered Signup Container */
+      .ic-Signup {
+        background: rgba(0, 0, 0, 0.7);
+        padding: 40px;
+        border-radius: 8px;
+        width: 300px;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+        text-align: center;
+      }
+
+      /* Input Fields Styling */
+      .ic-Form-control {
+        margin-bottom: 20px;
+        text-align: left;
+      }
+      .ic-Label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 14px;
+      }
+      .ic-Input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #555;
+        border-radius: 4px;
+        background-color: #333;
+        color: #fff;
+      }
+
+      /* Button Styling */
+      .Button--signup,
+      .Button--google {
+        width: 100%;
+        padding: 10px;
+        color: #fff;
+        border: 1px solid #fff;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+        margin-top: 10px;
+      }
+
+      /* Signup Button Specific Style */
+      .Button--signup {
+        background-color: #555;
+      }
+      .Button--signup:hover {
+        background-color: #777;
+      }
+
+      /* Google Button Specific Style */
+      .Button--google {
+        background-color: #db4437; /* Google red */
+      }
+      .Button--google:hover {
+        background-color: #e57368;
+      }
+    </style>
+    <script type="module" src="./js/signup.js"></script>
+  </head>
+  <body class="ic-Signup-Body">
+    <div class="ic-Signup">
+      <div>
+        <h2>Sign Up</h2>
+        <div class="ic-Form-control">
+          <label class="ic-Label" for="email">Email</label>
+          <input
+            class="ic-Input"
+            id="email"
+            type="text"
+          />
+        </div>
+        <div class="ic-Form-control">
+          <label class="ic-Label" for="password">Password</label>
+          <input
+            class="ic-Input"
+            id="password"
+            type="password"
+          />
+        </div>
+        <button id="sign-up-email" class="Button--signup">
+          Sign up
+      </div>
+    </div>
+  </body>
+</html>
