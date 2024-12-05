@@ -76,9 +76,12 @@ const clearAccessToken = () => {
 export const authStateListener = () => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
+      console.log(user)
+      sessionStorage.setItem("email", user.email);
       setAccessToken(user.accessToken);
     } else {
       clearAccessToken();
+      sessionStorage.removeItem("email");
     }
     if (
       user &&
