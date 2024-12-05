@@ -6,6 +6,10 @@ window.addEventListener("load", () => {
   const token = getAccessToken();
   if (token) {
     fetchUsersData();
+    const welcomeMessageElement = document.getElementById("welcome-message");
+    welcomeMessageElement.innerText = `Welcome, ${sessionStorage.getItem(
+      "email"
+    )}`;
   }
 
   document.getElementById("logout").addEventListener("click", logout);
@@ -62,9 +66,12 @@ function renderProductCards(data) {
 }
 
 function deleteRecord(billNo) {
-  fetchProtectedRoute(`https://splitbill-api.kidkrub.me/v1/histories/${billNo}`, {
-    method: "DELETE",
-  }).then(fetchUsersData());
+  fetchProtectedRoute(
+    `https://splitbill-api.kidkrub.me/v1/histories/${billNo}`,
+    {
+      method: "DELETE",
+    }
+  ).then(fetchUsersData());
 }
 
 function openDetailsPage(item) {
